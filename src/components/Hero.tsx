@@ -1,101 +1,75 @@
 import heroImage from '../assets/drakensburg.png'
 
-const navLinks = ['Home', 'Services', 'About', 'Testimonials', 'FAQ', 'Blog']
+const sidebarSteps = ['01', '02', '03', '04']
 
-function CompassIcon() {
+const features = [
+  { title: 'Be Yourself', description: 'With new expertise on your side' },
+  { title: 'Solid Infrastructure', description: 'Discover a partner you can rely on' },
+  { title: 'Be a Partner', description: 'With new-generation technology' },
+  { title: 'New Opportunity', description: 'Grow your business with us' },
+]
+
+function PinIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.8}>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M14.5 9.5 13 13l-3.5 1.5L11 11l3.5-1.5Z" />
+    <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8}>
+      <path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z" />
+      <circle cx="12" cy="9.5" r="2.2" />
     </svg>
   )
 }
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[720px] w-full overflow-hidden text-white">
-      <img
-        src={heroImage}
-        alt="Drakensberg mountains"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/70" />
+    <section id="home" className="bg-white px-4 pb-4 text-white sm:px-6">
+      {/* Hero image card, nav + sidebar + wordmark all live inside it, flush to the top */}
+      <div className="relative mx-auto h-[85vh] min-h-160 w-full max-w-[110rem] overflow-hidden rounded-b-3xl text-white">
+        <img
+          src={heroImage}
+          alt="Drakensberg mountains"
+          className="animate-fade-in absolute inset-0 h-full w-full scale-105 object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/10 to-black/80" />
 
-      <div className="relative z-10 flex h-full w-full flex-col justify-between">
-        {/* Nav */}
-        <div className="px-4 pt-4 sm:px-8 sm:pt-6">
-          <nav className="mx-auto flex w-full max-w-6xl items-center justify-between rounded-full border border-white/15 bg-white/10 px-4 py-2.5 shadow-lg shadow-black/10 backdrop-blur-md sm:px-6">
-            <div className="flex items-center gap-2 font-semibold tracking-tight">
-              <CompassIcon />
-              <span className="text-lg">RHTS</span>
+        {/* Numbered sidebar */}
+        <div className="animate-fade-in absolute left-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-6 text-xs font-medium text-white/50 sm:flex" style={{ animationDelay: '600ms' }}>
+          {sidebarSteps.map((step, i) => (
+            <div key={step} className="flex flex-col items-center gap-4">
+              {i > 0 && <span className="h-8 w-px bg-white/25" />}
+              <span className={i === 0 ? 'text-white' : ''}>{step}</span>
             </div>
-
-            <ul className="hidden items-center gap-8 text-sm font-medium text-white/90 md:flex">
-              {navLinks.map((link) => (
-                <li key={link} className="cursor-pointer transition hover:text-white">
-                  {link}
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-3">
-              <button className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90 sm:block">
-                Book a Call
-              </button>
-              <button className="grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white/10">
-                <span className="text-sm">A</span>
-              </button>
-            </div>
-          </nav>
+          ))}
         </div>
 
-        {/* Giant title, sunk into the image */}
-        <div className="pointer-events-none flex flex-1 items-center justify-center">
-          <h1 className="mix-blend-soft-light select-none whitespace-nowrap text-center font-display uppercase leading-none tracking-wide text-white/80 text-[30vw] sm:text-[26vw] md:text-[20rem] lg:text-[24rem]">
+        {/* Wordmark, centered, nudged up */}
+        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 pb-20 text-center sm:pb-28">
+          <h1 className="animate-fade-up select-none font-wordmark font-bold uppercase leading-none tracking-tight text-white text-[18vw] sm:text-[15vw] md:text-[12rem] lg:text-[13.5rem]">
             RHTS
           </h1>
+          <p
+            className="animate-fade-up mt-4 max-w-md text-sm text-white/80 sm:text-base"
+            style={{ animationDelay: '150ms' }}
+          >
+            Build Your Technology Future. Discover With Us.
+          </p>
         </div>
 
-        {/* Tagline + stats and booking card, aligned in one bottom row */}
-        <div className="mt-auto flex w-full flex-col items-start justify-between gap-8 px-6 pb-10 sm:px-10 sm:pb-14 lg:flex-row lg:items-end">
-          <div className="w-full max-w-md">
-            <h2 className="font-display text-4xl uppercase leading-[0.95] tracking-wide sm:text-5xl">
-              Technology Solutions
-              <br />
-              Built on Solid Ground.
-            </h2>
-
-            <div className="mt-6 flex items-center gap-3 text-sm text-white/85">
-              <div className="flex -space-x-2">
-                {[0, 1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="h-8 w-8 rounded-full border-2 border-white/80 bg-white/20 backdrop-blur"
-                  />
-                ))}
+        {/* Feature strip, inside the frame at the bottom */}
+        <div
+          className="animate-fade-up absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-black/30 px-6 py-10 backdrop-blur-sm sm:px-10 sm:py-14"
+          style={{ animationDelay: '300ms' }}
+        >
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4">
+            {features.map((feature) => (
+              <div key={feature.title} className="flex items-start gap-3 transition-transform duration-300 hover:-translate-y-0.5">
+                <PinIcon />
+                <div>
+                  <p className="font-wordmark text-lg font-medium tracking-tight text-white">
+                    {feature.title}
+                  </p>
+                  <p className="mt-1.5 text-sm leading-snug text-white/50">{feature.description}</p>
+                </div>
               </div>
-              <span>50+ Projects Delivered</span>
-            </div>
-          </div>
-
-          <div className="w-full max-w-xl rounded-2xl bg-white/95 p-4 text-black shadow-2xl backdrop-blur sm:p-5">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-[1fr_1fr_1fr_auto] sm:items-end">
-              <div>
-                <label className="block text-xs font-medium text-black/50">Service</label>
-                <p className="mt-1 truncate text-sm font-semibold">IT Consulting</p>
-              </div>
-              <div className="border-t border-black/10 pt-3 sm:border-l sm:border-t-0 sm:pl-4 sm:pt-0">
-                <label className="block text-xs font-medium text-black/50">Date</label>
-                <p className="mt-1 truncate text-sm font-semibold">Tuesday, 16 Aug 2026</p>
-              </div>
-              <div className="border-t border-black/10 pt-3 sm:border-l sm:border-t-0 sm:pl-4 sm:pt-0">
-                <label className="block text-xs font-medium text-black/50">Team Size</label>
-                <p className="mt-1 truncate text-sm font-semibold">2 People</p>
-              </div>
-              <button className="w-full rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-black/85 sm:w-auto">
-                Book a Call
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       </div>
